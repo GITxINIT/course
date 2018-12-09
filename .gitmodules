@@ -1,0 +1,3 @@
+[submodule "problems/01/sample"]
+	path = problems/01/sample
+	url = git@github.com:GITxINIT/sample-01-01.git
