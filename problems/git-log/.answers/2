@@ -1,0 +1,383 @@
+09c1175 Fix typo
+diff --git a/js/solution.js b/js/solution.js
+index 8fe7a79..f00d3b3 100644
+--- a/js/solution.js
++++ b/js/solution.js
+@@ -10,7 +10,7 @@ const bad_solutions = {
+ 	freeze: () => { for(;;); },
+ 	throw: () => null(),
+ 	bad_direction_name: () => 'kek',
+-	iife_bad: `(() => {
++	life_bad: `(() => {
+ 		const xs = ['right', 'right', 'up', 'kek'];
+ 		let i = 0;
+ 		return () => xs[i++ % xs.length];
+615aa35 Fix steps counter
+diff --git a/js/engine.js b/js/engine.js
+index 8b66bd4..3567bf0 100644
+--- a/js/engine.js
++++ b/js/engine.js
+@@ -12,11 +12,11 @@ const play = (() => {
+ 	const dc = [0, -1, 1, 0];
+ 
+ 	const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+-	let steps = 0;
+ 
+ 	return container => async (maze, solution) => {
+ 		let row = maze.findIndex(r => r[0][directions.left]);
+ 		let col = 0;
++		let steps = 0;
+ 
+ 		let came_from = directions.left;
+ 
+d25d0e8 Fix me being stupid
+diff --git a/js/main.js b/js/main.js
+index b024537..a5347df 100644
+--- a/js/main.js
++++ b/js/main.js
+@@ -12,4 +12,4 @@
+ 	const start = () => init_mazes().map((c, i) => play(c)(mazes[i], get_solution()));
+ 
+ 	document.getElementById('start-btn').addEventListener('click', start);
+-}();
++})();
+d66e29b Fix some mixed indentation
+diff --git a/js/solution.js b/js/solution.js
+index b3b6311..15b13e7 100644
+--- a/js/solution.js
++++ b/js/solution.js
+@@ -18,11 +18,11 @@ const init_step = code => {
+ };
+ 
+ const solution = (up, left, right, down, from) => {
+-  const from_index = ['left', 'up', 'right', 'down'].indexOf(from);
++	const from_index = ['left', 'up', 'right', 'down'].indexOf(from);
+ 
+-  const allowed = [up, right, down, left, up, right, down, left];
+-  return ['up', 'right', 'down', 'left', 'up', 'right', 'down', 'left']
+-      .find((dir, i) => i >= from_index && allowed[i]);
++	const allowed = [up, right, down, left, up, right, down, left];
++	return ['up', 'right', 'down', 'left', 'up', 'right', 'down', 'left']
++		.find((dir, i) => i >= from_index && allowed[i]);
+ };
+ 
+ const bad_solutions = {
+3f83f76 Fix minor inconsistencies
+diff --git a/js/draw.js b/js/draw.js
+index e1ea6b1..73e972a 100644
+--- a/js/draw.js
++++ b/js/draw.js
+@@ -1,14 +1,14 @@
+ const init_picasso = (() => {
+ 	const _unit = unit => value => `${value}${unit}`;
+ 	const [_px, _pct] = [`px`, `%`].map(_unit);
+-	
++
+ 	const _draw = container => maze => {
+ 		const borders = [`top`, `left`, `right`, `bottom`]
+-		const cell_size = (parseInt(container.clientWidth) / maze[0].length);
++		const cell_size = parseInt(container.clientWidth) / maze[0].length;
+ 		const st = { minWidth: _pct(100 / maze[0].length), maxWidth: _pct(100 / maze[0].length) };
+ 		const cell_pct_size = _pct(100 / maze[0].length);
+ 		document.styleSheets[0].insertRule(`.maze-cell { max-width: ${cell_pct_size}; min-width: ${cell_pct_size} }`);
+-	
++
+ 		for (let i = 0; i < maze.length; ++i) {
+ 			const row = Object.assign(document.createElement(`div`), { className: `maze-row` });
+ 			for (let j = 0; j < maze[i].length; ++j) {
+@@ -27,7 +27,7 @@ const init_picasso = (() => {
+ 			container.appendChild(row);
+ 		}
+ 	};
+-	
++
+ 	const _fill = container => columns => (r, c) => {
+ 		const element = container.children[r].children[c];
+ 		const rgba = Array.of;
+@@ -35,7 +35,7 @@ const init_picasso = (() => {
+ 		xs.push(Math.min(0.9, xs.pop() - -0.3));
+ 		element.style.backgroundColor = `rgba(${xs.join(', ')})`;
+ 	};
+-	
++
+ 	return (container, maze) => ({
+ 		fill: _fill(container)(maze[0].length),
+ 		draw: _draw(container)
+62b97d3 Fixing stupid horses
+diff --git a/index.html b/index.html
+index 39f1ecd..032135e 100644
+--- a/index.html
++++ b/index.html
+@@ -35,7 +35,6 @@
+ 		.maze {
+ 			display: flex;
+ 			flex-direction: row;
+-			flex: 0.5;
+ 			min-height: 15vw;
+ 			max-height: 15vw;
+ 			flex: 1;
+130409f Fix solution
+diff --git a/js/engine.js b/js/engine.js
+index e7fa4a6..4326016 100644
+--- a/js/engine.js
++++ b/js/engine.js
+@@ -21,11 +21,16 @@ const play = async maze => {
+ 	draw(maze);
+ 
+ 	while(col < maze[0].length) {
++		if(col < 0) {
++			alert('Not the correct exit');
++			return false;
++		}
++
++		fill(row, col);
++
+ 		const direction_name = step(...maze[row][col], direction_names[came_from]);
+ 		const dir = directions[direction_name];
+-		await sleep(100);
+-
+-		console.log(row, col, dir);
++		await sleep(50);
+ 
+ 		if(typeof dir === 'undefined') {
+ 			alert('Invalid return');
+@@ -40,12 +45,9 @@ const play = async maze => {
+ 		col += dc[dir];
+ 
+ 		came_from = dir ^ 3;
+-
+-		fill(row, col);
+ 	}
+ 
+ 	return true;
+ };
+ 
+ play(maze);
+-
+diff --git a/js/solution.js b/js/solution.js
+index 104a6ea..c19a0d5 100644
+--- a/js/solution.js
++++ b/js/solution.js
+@@ -6,14 +6,9 @@
+ // };
+ 
+ const step = (up, left, right, down, from) => {
+-  const from_index = {
+-    up: 0,
+-    left: 1,
+-    right: 2,
+-    down: 3
+-  }[from];
++  const from_index = ['left', 'up', 'right', 'down'].indexOf(from);
+ 
+-  const allowed = [right, up, down, left, right, up, down, left];
+-  return ['right', 'up', 'down', 'left', 'right', 'up', 'down', 'left']
++  const allowed = [up, right, down, left, up, right, down, left];
++  return ['up', 'right', 'down', 'left', 'up', 'right', 'down', 'left']
+       .find((dir, i) => i >= from_index && allowed[i]);
+ };
+602359d Fix generator
+diff --git a/generator.js b/generator.js
+index 57703a1..3704d05 100644
+--- a/generator.js
++++ b/generator.js
+@@ -1,8 +1,8 @@
+ const MAZE_WIDTH = 10;
+ const MAZE_HEIGHT = 10;
+ 
+-const dx = [0, 0, -1, 1];
+-const dy = [-1, 1, 0, 0];
++const dr = [-1, 0, 0, 1];
++const dc = [0, -1, 1, 0];
+ 
+ const entry_row = Math.random() * MAZE_HEIGHT | 0;
+ const exit_row = Math.random() * MAZE_HEIGHT | 0;
+@@ -19,12 +19,12 @@ const dfs = (r, c) => {
+ 
+ 	[0, 1, 2, 3]
+ 		.sort(() => Math.random() - 0.5)
+-		.filter(i => isValidCell(r + dx[i], c + dy[i]))
++		.filter(i => isValidCell(r + dr[i], c + dc[i]))
+ 		.forEach(i => {
+-			if(!visited[r + dx[i]][c + dy[i]]) {
++			if(!visited[r + dr[i]][c + dc[i]]) {
+ 				mazeOutput[r][c][i] = true;
+-				mazeOutput[r + dx[i]][c + dy[i]][i ^ 3] = true;
+-				dfs(r + dx[i], c + dy[i]);
++				mazeOutput[r + dr[i]][c + dc[i]][i ^ 3] = true;
++				dfs(r + dr[i], c + dc[i]);
+ 			}
+ 		});
+ };
+diff --git a/js/main.js b/js/main.js
+index 1f8cef1..4ab1455 100644
+--- a/js/main.js
++++ b/js/main.js
+@@ -3,103 +3,104 @@
+ // each cell is an array of 4 bools: [up, left, right, down]
+ 
+ const maze = [
+-  [ [ false, true, false, false ],
+-    [ false, true, true, false ],
+-    [ false, true, true, false ],
+-    [ false, true, true, false ],
+-    [ false, true, true, false ],
++  [ [ false, false, true, false ],
++    [ false, true, false, true ],
++    [ false, false, true, true ],
+     [ false, true, true, false ],
++    [ false, true, false, true ],
++    [ false, false, true, true ],
+     [ false, true, true, false ],
+     [ false, true, true, false ],
+     [ false, true, true, false ],
+-    [ false, false, true, true ] ],
+-  [ [ false, false, false, true ],
+-    [ true, false, false, true ],
++    [ false, true, false, true ] ],
++  [ [ false, false, true, true ],
++    [ true, true, false, false ],
++    [ true, false, true, false ],
++    [ false, true, false, true ],
++    [ true, false, true, false ],
+     [ true, true, false, false ],
++    [ false, false, true, false ],
++    [ false, true, true, true ],
++    [ false, true, false, false ],
++    [ true, false, false, true ] ],
++  [ [ true, false, true, false ],
++    [ false, true, false, true ],
+     [ false, false, false, true ],
+     [ true, false, false, true ],
+-    [ true, false, false, true ],
+-    [ true, false, false, true ],
+-    [ true, false, false, true ],
+-    [ true, false, false, true ],
+-    [ true, false, false, false ] ],
+-  [ [ true, true, false, false ],
+     [ false, false, true, false ],
+     [ false, true, true, false ],
+-    [ true, true, false, false ],
+-    [ false, true, true, false ],
++    [ false, true, true, true ],
++    [ true, true, false, true ],
+     [ false, false, true, true ],
+-    [ false, false, false, true ],
++    [ true, true, false, true ] ],
++  [ [ false, false, false, true ],
+     [ true, false, false, true ],
++    [ true, false, true, true ],
+     [ true, true, false, false ],
+-    [ false, false, true, true ] ],
+-  [ [ false, true, false, false ],
+-    [ false, true, true, false ],
+     [ false, false, true, true ],
+-    [ false, false, false, true ],
+-    [ true, true, false, false ],
+-    [ true, true, false, false ],
+-    [ false, true, true, false ],
+     [ false, true, true, false ],
+-    [ false, false, true, false ],
++    [ true, true, false, false ],
++    [ true, false, false, true ],
++    [ true, false, false, true ],
+     [ true, false, false, true ] ],
+-  [ [ false, false, true, true ],
++  [ [ true, false, true, true ],
+     [ true, true, false, false ],
++    [ true, false, true, false ],
++    [ false, true, true, false ],
+     [ true, true, false, false ],
+     [ false, false, true, true ],
+-    [ false, false, true, true ],
++    [ false, true, true, false ],
+     [ true, true, false, false ],
+-    [ false, false, true, false ],
+-    [ false, false, false, true ],
+     [ true, false, false, true ],
+     [ true, false, false, false ] ],
+-  [ [ false, true, false, false ],
+-    [ false, false, true, false ],
+-    [ false, true, false, false ],
+-    [ true, true, false, false ],
+-    [ false, false, true, true ],
++  [ [ true, false, true, false ],
++    [ false, true, false, true ],
+     [ false, false, true, true ],
+-    [ true, true, false, false ],
+-    [ true, false, false, true ],
+-    [ false, true, false, false ],
+-    [ false, false, true, true ] ],
++    [ false, true, true, false ],
++    [ false, true, false, true ],
++    [ true, false, true, false ],
++    [ false, true, true, false ],
++    [ false, true, false, true ],
++    [ true, false, true, false ],
++    [ false, true, false, true ] ],
+   [ [ false, false, true, true ],
+-    [ true, true, false, false ],
+-    [ false, false, true, true ],
+     [ true, true, false, false ],
+     [ true, false, false, true ],
++    [ false, false, false, true ],
++    [ true, false, true, false ],
++    [ false, true, true, false ],
++    [ false, true, false, true ],
++    [ true, false, true, false ],
++    [ false, true, false, true ],
++    [ true, false, false, true ] ],
++  [ [ true, false, true, false ],
++    [ false, true, false, true ],
++    [ true, false, true, true ],
++    [ true, true, true, false ],
++    [ false, true, true, false ],
+     [ false, true, false, false ],
+-    [ false, false, true, true ],
++    [ true, false, true, false ],
++    [ false, true, true, false ],
+     [ true, true, false, false ],
+-    [ false, false, true, false ],
+     [ true, false, false, true ] ],
+-  [ [ true, false, false, true ],
+-    [ false, false, true, true ],
++  [ [ false, false, true, true ],
+     [ true, true, false, false ],
++    [ true, false, false, false ],
+     [ false, false, true, true ],
+-    [ true, true, false, false ],
+-    [ false, false, true, false ],
+-    [ true, true, false, false ],
+     [ false, true, true, false ],
+-    [ false, false, true, false ],
+-    [ true, false, false, true ] ],
+-  [ [ true, false, false, true ],
+-    [ false, true, false, false ],
+-    [ false, false, true, true ],
+-    [ true, false, false, true ],
+-    [ true, false, false, true ],
+-    [ true, false, false, true ],
+-    [ true, true, false, false ],
+-    [ false, false, false, true ],
+-    [ true, false, false, true ],
+-    [ true, false, false, false ] ],
+-  [ [ true, true, false, false ],
+     [ false, true, true, false ],
+     [ false, true, true, false ],
++    [ false, true, true, false ],
++    [ false, true, false, true ],
++    [ true, false, false, true ] ],
++  [ [ true, false, true, false ],
+     [ false, true, true, false ],
+     [ false, true, true, false ],
+-    [ false, false, true, false ],
+-    [ false, false, true, true ],
+     [ true, true, false, false ],
++    [ false, false, true, false ],
++    [ false, true, true, false ],
++    [ false, true, true, false ],
+     [ false, true, true, false ],
+-    [ false, false, true, false ] ] ];
++    [ true, true, true, false ],
++    [ true, true, false, false ] ] ]
++;

@@ -1,0 +1,10 @@
+7bede99 Added fill function to colorize cells
+dc6eb10 Refactor in draw function
+b6d42b4 Merge index.html
+4d3a087 Prototype visualization
+c193396 Initial version of the "engine"
+602359d Fix generator
+ebf0c63 Drill holes for maze exits
+8e2a23e Add a generated maze for testing
+77fd65f Output maze
+89516e4 dfs for maze generator

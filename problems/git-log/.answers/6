@@ -1,0 +1,34 @@
+commit 7c286a2fa95d93f6013ea67f23e561bd11beb300
+Merge: 049c505 58ccec1
+Author: Stefan Ivanov <ivanov.st94@gmail.com>
+Date:   Sat Sep 15 01:16:28 2018 +0300
+
+    Merge branch 'description2'
+
+commit dbbcdb94cdd7091454e12196a7e5e9a9b4f81dd5
+Merge: bbe85e9 5a434a5
+Author: Kristiyan Tsaklev <cuki@cukii.me>
+Date:   Sun Sep 9 17:00:56 2018 +0300
+
+    Merge branch 'origin/master'
+
+commit 9f8aebe83c5c0968dcc904fafeefe929c058d585
+Merge: 11c5724 777d1ec
+Author: Kristiyan Tsaklev <cuki@cukii.me>
+Date:   Sun Aug 26 16:49:18 2018 +0300
+
+    Merge branch 'origin/master'
+
+commit 777d1ec8cbdbc67d40249e2f0679f06f27fcceb2
+Merge: dfa4906 6be4605
+Author: Konstantin Simeonov <kon.simeonov@protonmail.com>
+Date:   Sun Aug 26 16:37:23 2018 +0300
+
+    Merge branch 'origin/master'
+
+commit b6d42b4562477920c4327d5e10e19a0864780e7c
+Merge: 4d3a087 c193396
+Author: Konstantin Simeonov <kon.simeonov@protonmail.com>
+Date:   Tue Aug 21 21:59:27 2018 +0300
+
+    Merge index.html
