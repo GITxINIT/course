@@ -74,3 +74,8 @@ Ignored files:
 1. Clones only 10 levels of directory nesting depth in the repository and ignores the rest of the files/directories
 1. TODO: `git fetch --unshallow` here
 
+#### A repository with two branches (`master` and `dev`) is given. If you're currently on `master`, which command can be used to obtain only the version of the file `webpack.config.js` from the `dev` branch into the current working directory:
+1. `git checkout dev -- webpack.config.js`
+1. `git reset HEAD dev -- webpack.config.js`
+1. `git reset dev -- webpack.config.js`
+1. `git checkout dev`
