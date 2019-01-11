@@ -37,7 +37,7 @@ no changes added to commit (use "git add" and/or "git commit -a")
 1. All the untracked and ignored files and directories will be removed, `Lib.hs` will be kept, because `git clean` removes untracked content
 1. Only `.vscode/` and `README.md` will be removed, because tracked content and ignored entries are not touched by `git clean`
 
-#### Given the following output of `git status --ignored`, which of the commands below can be used to get rid of all untracked and ignored files.
+#### Given the following output of `git status --ignored`, which of the commands below can be used to get rid of all untracked and ignored files, while keeping the staged changes?
 ```
 On branch master
 Your branch is ahead of 'origin/master' by 1 commit.
