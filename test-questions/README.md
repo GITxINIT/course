@@ -1,4 +1,4 @@
-ch of the following statements about `git status` is false?
+#### Which of the following statements about `git status` is false?
 1. `git status` show information about what would be committed if `git commit` is run
 1. `git status` can be used to obtain information about conflicts in files during a merge
 1. `git status` can display information about previous commit entries
@@ -79,3 +79,44 @@ Ignored files:
 1. `git reset HEAD dev -- webpack.config.js`
 1. `git reset dev -- webpack.config.js`
 1. `git checkout dev`
+
+#### Pick the commands that can be used to only stage some of the changes to `main.cpp` for commiting:
+1. `git add main.cpp`
+1. `git add`
+1. `git add -p main.cpp`
+1. `git add -i`
+
+#### Which commands can be used to remove only some of the changes from the index, but keep them in the working directory?
+1. `git reset -p`
+1. `git checkout -p`
+1. `git reset HEAD --soft`
+1. `git reset HEAD -p`
+
+#### You're on branch `dev/feature-1`, but your coworkers have been up to some cool stuff in their branch `dev/feature-42` and you would like to have some of the changes they made to `Parser.hs` file in your working directory, but without checking out another branch. Is this possible and if it is, how can you do it?
+1. I'll use `git reset -p dev/feature-42 -- Parser.hs` to partially reset only `Parser.hs` to the state I would like
+1. I can use a partial checkout with patch option `git checkout -p dev/feature-42 -- Parser.hs`
+1. It's not possible, I'll checkout `dev/feature-42`, copy the file, checkout `dev/feature-1` and paste the file there
+
+#### Choose the wrong statements about commits:
+1. Merge commits have more than one parent
+1. Commit contents cannot be edited
+1. Commit messages can never be edited after the commit is made
+1. The committer and the author are always the same person
+
+#### Choose the correct statements about `git commit --amend`:
+1. It can delete the commit from the history
+1. It can be used to add content to the commit
+1. It does not have an option which makes it keep the previous commit message, but amend only the content
+1. It can bse used to edit the commit message
+
+#### Choose all correct ways to create a branch named `the-long-awaited-refactoring`:
+1. `git checkout the-long-awaited-refactoring`
+1. `git checkout -b the-long-awaited-refactoring`
+1. `git branch the-long-awaited-refactoring`
+1. `git branch -D the-long-awaited-refactoring`
+
+#### Choose all corrects statements about `git branch`:
+1. `git branch` lists all local branches
+1. `git branch -vv` outputs information about which remote branches are tracked by which local branches
+1. `git branch -r` lists both local and remote branches
+1. `git branch -a` lists both local and remote branches
