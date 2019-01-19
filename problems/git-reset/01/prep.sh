@@ -34,3 +34,4 @@ console.log(knapsack(5, 10, [9, 1, 2, 3], [8, 6, 7, 8]));
 "
 
 echo "$solution" > knapsack.js
+git add knapsack.js
