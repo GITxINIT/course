@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+git reset knapsack.js && git checkout knapsack.js
+
 readonly solution="'use strict';
 
 const knapsack = (n, weightCapacity, weights, values) => {
