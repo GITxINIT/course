@@ -10,3 +10,6 @@ Hristofor is coding algorithms in javascript and today he's coding the knapsack 
 In case something goes wrong and you want to start from a clean slate, you can use `git reset && git checkout knapsack` (or `git reset --hard` to reset the state of the whole repository).
 
 After you're done, test the result by running `test.sh`.
+
+## Extra problem
+Try to achieve the same by moveing the wholw file out of the index with `git reset` and staging only the relevent changes with `git add -p`.
