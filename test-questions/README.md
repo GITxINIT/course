@@ -120,3 +120,14 @@ Ignored files:
 1. `git branch -vv` outputs information about which remote branches are tracked by which local branches
 1. `git branch -r` lists both local and remote branches
 1. `git branch -a` lists both local and remote branches
+
+#### Choose the correct statements regarding `git status`:
+1. Can be give information about the name of the current branch.
+1. Doesn't give information on untracked files.
+1. Can be used to obtain a list of files with conflicts during a merge/rebase.
+1. Changes the repository state.
+
+#### Pick most truthful statement about commits in git:
+1. Each commit is a stored patch (i.e. the difference between two states)
+1. Each commit is standalone and contains a copy of the whole repository.
+1. Each commit together with all commits before it forms a snapshot of the repository at that point in history.
