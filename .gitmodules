@@ -1,3 +1,6 @@
 [submodule "problems/01/sample"]
-	path = problems/01/sample
+	path = 01. Git gud at solo git/problems/01/sample
 	url = git@github.com:GITxINIT/sample-01-01.git
+[submodule "01. Git gud at solo git/problems/88f1fa55a33f099a1b007aec4b23317f"]
+	path = 01. Git gud at solo git/problems/command-line-intro/bash-cheatsheet
+	url = https://gist.github.com/88f1fa55a33f099a1b007aec4b23317f.git
