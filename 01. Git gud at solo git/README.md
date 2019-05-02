@@ -10,6 +10,9 @@
   - How do I get git running on my machine?
   - Do I need a github or a gitlab profile?
   - How to configure your name and email for git
+  - The command line
+    - Reasons to use the command line
+    - A few examples of command line usage
   - What is a git repository and how do I do stuff with it:
     - How do I make one
     - How can I get an existing one
@@ -105,6 +108,28 @@ fatal: unable to auto-detect email address (got 'root@b048506c87d0.(none)')
 ```
 
 You can run the commands suggested by `git` in the output above with your credentials in place of the example credentials.
+
+## The command line and it's place in this course
+- All demos during this course will use the command line
+- Some of the practice problems will require use of the command line
+- Some test questions will include command use and/or output
+- Tip: best forget that you can use anything else besides command line for working with git during this course
+
+### Reasons to use the command line instead of `insert-name-of-gui-thing-im-using`
+- If git can be run on a machine, it will have a command line
+  - This is not true for graphical clients, because they may not run under some OSes and under machines that do not provide graphical servers.
+  - Usage is almost identical under all environments
+- GUI offer varying support for git features
+- Command line is more performant (because it doesn't have to draw things)
+- Error messages are usually more descriptive and detailed
+- Allows automation
+- Command line usage of git helps develop strong fundamentals in git
+  - The developed understanding and skills will allow you to easily work with a graphical client
+  - Reversely, knowing what buttons to press won't help you understand the command line
+- SSH is amazing
+
+### A few command line examples
+TODO
 
 ## What is a `git` repository and how do I do stuff with it
 - A `git` repository is just an ordinary directory that has a `.git` directory inside it. The `.git` directory is the place where `.git` stores the state of the repository.
