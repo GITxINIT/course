@@ -113,23 +113,50 @@ You can run the commands suggested by `git` in the output above with your creden
 - All demos during this course will use the command line
 - Some of the practice problems will require use of the command line
 - Some test questions will include command use and/or output
-- Tip: best forget that you can use anything else besides command line for working with git during this course
+- Tip: forget that you can use anything else besides command line for working with git during this course
+
+
+### But I don't even know what the command line actually is
+- It's a user interface that uses text instead of graphics to communicate with the user
+- You make it do stuff by typing commands in it
+  - It interprets your commands and does stuff
+  - Commands consist of two things - name of the command and arguments (optional)
+  - It's a lot like calling functions and seeing the result printed on the screen, only after each function terminates, control is returned to the user
+- There are different flavors of command line intefaces, like `bash`, `powershell`, `cmd`, `zsh`
+  - Some of them are fundamentally different, like `bash` and `powershell`
+  - This course will focus on `bash`, but `bash` compatible shells are okay
 
 ### Reasons to use the command line instead of `insert-name-of-gui-thing-im-using`
-- If git can be run on a machine, it will have a command line
-  - This is not true for graphical clients, because they may not run under some OSes and under machines that do not provide graphical servers.
-  - Usage is almost identical under all environments
-- GUI offer varying support for git features
-- Command line is more performant (because it doesn't have to draw things)
-- Error messages are usually more descriptive and detailed
-- Allows automation
-- Command line usage of git helps develop strong fundamentals in git
-  - The developed understanding and skills will allow you to easily work with a graphical client
-  - Reversely, knowing what buttons to press won't help you understand the command line
-- SSH is amazing
+- Command line git
+  - Is universal for all the environments git runs in
+  - Is more performant/uses less system resources
+  - Has better error messages
+  - Has the power of whatever shell you're using (bash, zsh, powershell)
+  - Helps develop understanding of git that can be applied to working with GUIs
+- Git GUIs
+  - do not offer full support for everything you can do with git
+  - do weird stuff
+  - sometimes have cryptic error messages or bad feedback
+  - Knowing what buttons to press can't be applied as well to other git tools
 
-### A few command line examples
-TODO
+### A few command line examples in `bash`
+```bash
+ls # list all files in the current dir
+mkdir gosho # creates a directory called gosho
+cd gosho # changes the current directory of the shell to gosho/
+echo "hello" # print "hello" to the standard output
+echo "hello" > file.txt # print "hello" to the output and redirect it to file.txt so it's written there
+rm file.txt # delete file.txt from the file system
+cd .. # go one directory up
+rm -rf gosho # deletes a directory
+```
+
+### This sounds hard, how do I learn this
+- It looks way harder than it is
+- This course have you covered with:
+  - A dozen easy tasks with solutions which will help you grasp the basics in no more than 30 minutes
+  - A cheatsheet with useful little command line tricks that will help you go places
+  - Many of the practical problems will feature setup/test scripts that you do not have to read, but you can always scrape some knowledge off them :)
 
 ## What is a `git` repository and how do I do stuff with it
 - A `git` repository is just an ordinary directory that has a `.git` directory inside it. The `.git` directory is the place where `.git` stores the state of the repository.
