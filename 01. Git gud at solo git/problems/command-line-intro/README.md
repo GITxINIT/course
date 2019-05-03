@@ -10,4 +10,9 @@ Using `bash-cheatsheet/bash-cheatsheet.sh` as a reference, complete the followin
 1. Move `hello2.txt` outside of the current directory
 1. Change your directory to somewhere outside the current directory
 1. Delete the directory you created
-TODO
+1. Change your current directory to the root of this repository
+1. List all files (including hidden files) in the current directory
+1. Print the last 10 lines of the README.md
+1. Print the first 10 lines of the README.md
+1. Print all the lines in README.md that contain the word "What"
+1. Use `head` and `tail` to print lines 5-20 from a file of your choice (hint: piping is your friend)
