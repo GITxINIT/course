@@ -177,15 +177,18 @@ To introduce changes, you have to add some files and/or directories. A single fi
 - `git add` adds files to the git index
 - `git commit` introduces an annotated change to the history that contains whatever has been added to the git index
 
-### Whoa, this looks too complicated, I just want something like `git save`
+### I just want something like `git save`
 Why are there two commands for saving? `git` actually has a different way of keeping track of repository states than you might expect. Let us have a repository with 4 recorded states (they are called commits): `s0`, `s1`, `s2`, `s3`. In such case, the git history looks like that:
 
 ```
 s0 -> s1 -> s2 -> s3 -> git index
 ```
 
-You can look at the `git index` as a part of the repository history that still hasn't become official.
-  - You can add file changes to the git index with `git add` command or remove file changes from it with the `git reset` command.
+You can look at the `git index` as a commit that is not finalized.
+  - It contains things that will be committed when you run `git commit`
+  - It IS NOT your working directory and can contain different files
+  - You can add files to the git index with `git add <path>`
+  - You can remove files from the git index with `git reset <path>`
 If you have some changes in you git index (they're called `staged changes`) and you run `git commit` and provide a commit message, the repository history will become the following:
 
 ```
@@ -193,3 +196,65 @@ s0 -> s1 -> s2 -> s3 -> s4 -> git index
 ```
 
 The contents of the git index will become a part of the previous states of the repository and the index will be empty again.
+
+### What is a commit?
+TODO
+
+### Making changes (commits)
+
+```bash
+git add docs/loveletter.txt # add this file to the git index
+git add poems/ # add everything in this directory to the git index
+git reset poems/crappy-poem.txt # unstage the file from the git index
+git reset # remove everything from the git index, but keep it in the working dir
+git commit # commit everything that has been staged in the index
+git commit -a # commit everything in your working directory (even unstaged files)
+```
+
+### Querying the current state of the repo
+When working with `git`, the following information is important quite often:
+  - What files have been changed
+  - What's in the index and what isn't
+  - What branch I'm on
+
+This information can be obtained by simply executing the `git status` command. Since it shows the current state of the repo, this is a bread and butter command that is used in conjuction with the majority of the `git` commands out there.
+
+### What exactly have been changed since the last commit
+`git status` provides information about what files have changed and whether those changes are in the index, but what actually are those changes?
+`git diff` can output information about the difference between different things in the repository:
+  - `git diff` prints diff between the working directory and the `git index`
+  - `git diff --staged` prints diff between the `git index` and the last commit
+  - `git diff --stat` prints how many lines have been added/deleted from the changed files
+
+### Querying the repository history (i.e. the chain of commits)
+`git log` is the command that outputs information about previous commits, in it's simplest form it outputs commits from newest to oldest. It also has various useful options:
+  - `git log --oneline` formats each commit summary on a single line
+  - `git log --since=date` and `git log --before` allow to query for commits before or after a given date
+  - `git log --author=name` will list all commits from the given author
+  - `git log -n` list the most recent `n` commits
+
+### I can see the history, but how can I travel back in time?
+`git checkout <commitid>` will change the contents of your working directory to the contents in the given commit id. The commit ids can be taken from the output of the `git log` command. A other few convenvient uses of `git checkout`:
+  - `git checkout .` will reset your working directory to the state of the last commit
+  - `git checkout HEAD~n` will reset your working directory to the state before `n` commits
+  - `git checkout master` will bring you back to your main branch after travelling back in time
+
+## Working with remote repos
+Up to now, we only worked with a local repository, which leaves a few questions open:
+  - How do I clone a remote repository?
+  - How do I pull changes from a remote repository?
+  - How do I push my changes to a remote repository?
+  - I hear mumbo-jumbo about `git` being decentralized, what does that mean?
+
+### Cloning a remote repo
+TODO: revise
+Repos can be cloned via the `git clone <url>` command, where the url could be one of:
+- You will mostly use the following two:
+  - http[s]://host.xz[:port]/path/to/repo.git/ - `https://github.com/KonstantinSimeonov/horsebin.git`
+  - [user@]host.xz:path/to/repo.git/ - `git@github.com:KonstantinSimeonov/horsebin.git`
+- Also possible:
+  - ssh://[user@]host.xz[:port]/path/to/repo.git/
+  - git://host.xz[:port]/path/to/repo.git/
+  - ftp[s]://host.xz[:port]/path/to/repo.git/
+  - /home/user/Projects/some-repo.git
+  - C:\Documents\Projects\some-repo.git
