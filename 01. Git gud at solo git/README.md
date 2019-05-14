@@ -330,6 +330,11 @@ This information can be obtained by simply executing the `git status` command. S
   - `git checkout HEAD~n` will reset your working directory to the state before `n` commits
   - `git checkout master` will bring you back to your main branch after travelling back in time
 
+---
+
+## Remote repos
+Cloning, pushing, pulling, git being distributed
+
 ----
 
 ## Working with remote repos
@@ -342,26 +347,75 @@ Up to now, we only worked with a local repository, which leaves a few questions 
 ----
 
 ### Cloning a remote repo
-Repos can be cloned via the `git clone <url>` command:
-- Mostly used:
-  - `http[s]://host.xz[:port]/path/to/repo.git` - `https://github.com/KonstantinSimeonov/horsebin.git`
-  - `[user@]host.xz:path/to/repo.git` - `git@github.com:KonstantinSimeonov/horsebin.git`
-- Also possible:
-  - `ssh://[user@]host.xz[:port]/path/to/repo.git`
-  - `git://host.xz[:port]/path/to/repo.git`
-  - `ftp[s]://host.xz[:port]/path/to/repo.git`
-  - `/home/user/Projects/some-repo.git`
-  - `C:\Documents\Projects\some-repo.git`
+Repos can be cloned via the `git clone <url>` command, where url could be:
+
+```bash
+# https protocol
+# http[s]://host.xz[:port]/path/to/repo.git
+git clone https://github.com/KonstantinSimeonov/horsebin.git
+
+# ssh protocol
+# [user@]host.xz:path/to/repo.git
+git clone git@github.com:KonstantinSimeonov/horsebin.git
+
+# ssh://[user@]host.xz[:port]/path/to/repo.git
+git clone ssh://kon@cukii.me/public/git/horsebin.git
+```
 
 ----
 
-### Cloning a repo: example
+### Other protocols
+
 ```bash
-# clone the repository for this course into the "course/" dir
+# git protocol
+git://host.xz[:port]/path/to/repo.git
 
-# over https
-git clone https://github.com/GITxINIT/course.git
+# ftp protocol
+ftp[s]://host.xz[:port]/path/to/repo.git`
 
-# over ssh
-got clone git@github.com:GITxINIT/course.git
+# from the filesystem
+/home/user/Projects/some-repo.git
+C:\Documents\Projects\some-repo.git
 ```
+
+----
+
+### Useful git clone options
+```bash
+# clone only the last n commits of history
+git clone --depth n https://github.com/microsoft/TypeScript.git
+
+# clone into a directory of your choice
+git clone https://github.com/microsoft/TypeScript.git ts-fork
+
+# clone and initialize all submodules
+git clone --recurse-submodules git@gitlab.com/user/repo.git
+```
+
+----
+
+### HTTPS vs SSH
+- `https` and `ssh` are the most common protocols used with git
+- You can easily use either:
+  - Setting up `https` has fewer steps, so consider `https` during this course
+
+----
+
+### Git over https
+- https required virtually no setup
+- supports basic authentication (username + password), used for github/gitlab/etc
+- firewalls usually do not mess with default https settings
+
+----
+
+### Git over ssh
+- `ssh` in a nutshell can be described as you having secure command line access to another machine over the network
+- more secure in several ways
+- can provide both username/password and public/private key authentication
+  - you have generate keys and put them in the right places to set it up
+- some firewalls might block default ssh ports
+
+---
+
+## Pulling, pushing and working with remotes
+TODO
